@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\logging-interceptor\3.3.1\99ce730034c6f5aaed710d1e0e9df95e8714ed5f\logging-interceptor-3.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="99ce730034c6f5aaed710d1e0e9df95e8714ed5f">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\logging-interceptor-3.3.1_ce9aac553142345198d7f830989accb7833111de\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.picasso\picasso\2.5.2\7446d06ec8d4f7ffcc53f1da37c95f200dcb9387\picasso-2.5.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="7446d06ec8d4f7ffcc53f1da37c95f200dcb9387">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\picasso-2.5.2_c2fb5da9a5bbdc85634ba8ce764d851f5a236f21\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\org.parceler\parceler\1.0.0\3e2ad6a645d7956b33245304d01b6b8500b842b8\parceler-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3e2ad6a645d7956b33245304d01b6b8500b842b8">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\parceler-1.0.0_18d14220052e225889423de6996fe44c7d1aa4d9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\retrofit\2.1.0\2de7cd8b95b7021b1d597f049bcb422055119f2c\retrofit-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="2de7cd8b95b7021b1d597f049bcb422055119f2c">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\retrofit-2.1.0_fbef2c668bcdad916128f2ba932877c9b019e27a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.8.0\5ea7af56cc7c567ed9856d99efb30740e9b17ff\okio-1.8.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="05ea7af56cc7c567ed9856d99efb30740e9b17ff">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\okio-1.8.0_eb213c86e8ff46673dd56c25b1a4a280a432cf30\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\Main\worksapce\android\EV\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="b2bc011967320ca00d77ffbc02fa2416e91e3c7a">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_1658234b7154afb285af8787d22990c23e0fff85\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\org.parceler\parceler-api\1.0.0\1b8d9e2c806bd7aaa5473ad09d197d5e862453be\parceler-api-1.0.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1b8d9e2c806bd7aaa5473ad09d197d5e862453be">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\parceler-api-1.0.0_728338f51ddaa3dbb60a4dee5a01b2c2a40aa939\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.android\build-cache\d73392eb0c23639bf9e135d8c16545b6d1006dd0\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="914f5d3e3ace66080e59613708f06d129a222e25">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d060f198547215eb049b5899f49ef25477568ea5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\Main\worksapce\android\EV\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_86c46f638d10c469a80b7323c088a27117189cd2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.7\751f548c85fa49f330cecbb1875893f971b33c4e\gson-2.7.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="751f548c85fa49f330cecbb1875893f971b33c4e">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.7_ef70cb1a3f05b60ff0d60281b3e19538a3d16ed9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.retrofit2\converter-gson\2.1.0\aa557d71ead91cbf26e0c316a0f593d168303309\converter-gson-2.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="aa557d71ead91cbf26e0c316a0f593d168303309">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\converter-gson-2.1.0_44d210ac1e599e24ed985a233319cd2f403cf7b3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.android\build-cache\a252bf0377169019c545c48ba201a2f54c6a41e6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a2af9c72ccaa4c5c049b500ca6ea664a4ce1f7d4">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_ec68a628d5414c80ea4e1e15fc6f463d5cbb5d6b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\NuuN\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.3.1\19047bdb6a4fc00a44124f64ca98e88fc204e7e3\okhttp-3.3.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="19047bdb6a4fc00a44124f64ca98e88fc204e7e3">
+        <dex dex="E:\Main\worksapce\android\EV\app\build\intermediates\transforms\dex\debug\folders\1000\10\okhttp-3.3.1_622e217d8e39c3c43c3553d4df5d67646441d522\classes.dex" />
+    </item>
+
+</items>
