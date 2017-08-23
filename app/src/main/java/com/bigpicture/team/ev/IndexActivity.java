@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bigpicture.team.ev.item.MemberInfoItem;
 import com.bigpicture.team.ev.lib.EtcLib;
@@ -41,9 +42,9 @@ public class IndexActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_index);
 
-        context = this;
+        //context = this;
 
-        if (!RemoteLib.getInstance().isConnected(context)) {
+        if (!RemoteLib.getInstance().isConnected(this)) {
             showNoService();
             return;
         }
@@ -54,7 +55,6 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         Handler mHandler = new Handler();
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -70,13 +70,14 @@ public class IndexActivity extends AppCompatActivity {
         messageText.setVisibility(View.VISIBLE);
 
         Button closeButton = (Button)findViewById(R.id.close);
+        closeButton.setVisibility(View.VISIBLE);
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        closeButton.setVisibility(View.VISIBLE);
+
     }
 
     //ID와 동일한 사용자 조회하기 위해 selectMemberInfo()호출,
@@ -84,6 +85,8 @@ public class IndexActivity extends AppCompatActivity {
     public void startTask(){
         String userId = EtcLib.getInstance().getPhoneNumber(this);
 
+        //UserID 확인
+        //Toast.makeText(IndexActivity.this, userId,Toast.LENGTH_LONG).show();
         selectMemberInfo(userId);
         GeoLib.getInstance().setLastKnownLocation(this);
     }
@@ -101,8 +104,10 @@ public class IndexActivity extends AppCompatActivity {
                 if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.name)){
                     MyLog.d(TAG,"success "+ response.body().toString());
                     setMemberInfoItem(item);
-                } else{
+                }
+                else{
                     MyLog.d(TAG,"not success");
+                    //Toast.makeText(IndexActivity.this, "not success",Toast.LENGTH_LONG).show();
                     goProfileActivity(item);
                 }
             }
@@ -134,10 +139,15 @@ public class IndexActivity extends AppCompatActivity {
     //전화번호를 서버에 저장하고 MainActivity 실행한 후에 ProfileActivity 실행
     //그리고 현재 액티비티 종료
     private void goProfileActivity(MemberInfoItem item){
-        if (item ==null || item.seq<=0){
+        if (item==null || item.seq<=0){
             insertMemberPhone();
+
+            //Toast.makeText(IndexActivity.this, "item is null or seq is less than 0",Toast.LENGTH_LONG).show();
         }
-        Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+      //  Intent intent = new Intent(IndexActivity.this, MainActivity.class);
+      //  startActivity(intent);
+
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
 
         Intent intent2 = new Intent(this, ProfileActivity.class);
@@ -148,7 +158,7 @@ public class IndexActivity extends AppCompatActivity {
 
     //폰번호를 서버에 저장
     private void insertMemberPhone(){
-        String phone = EtcLib.getInstance().getPhoneNumber(context);
+        String phone = EtcLib.getInstance().getPhoneNumber(this);
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
 
         Call<String> call = remoteService.insertMemberPhone(phone);

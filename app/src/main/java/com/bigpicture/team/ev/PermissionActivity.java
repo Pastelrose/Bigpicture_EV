@@ -55,18 +55,17 @@ public class PermissionActivity extends AppCompatActivity {
         List<String> listPermissionsNeeded = new ArrayList<>();
 
         for (String permission:permissions){
+            //뿅
             if(ContextCompat.checkSelfPermission(this,permission) !=
                     PackageManager.PERMISSION_GRANTED){
                 listPermissionsNeeded.add(permission);
             }
         }
-
         if(!listPermissionsNeeded.isEmpty()){
             ActivityCompat.requestPermissions(this,
                     listPermissionsNeeded.toArray(new String[listPermissionsNeeded.size()]), PERMISSION_MULTI_CODE);
             return false;
         }
-
         return true;
     }
 
@@ -85,12 +84,12 @@ public class PermissionActivity extends AppCompatActivity {
 
     private void checkpermissionResult(String[] permissions, int[] grantResults) {
         boolean isAllgranted = true;
-
         for(int i = 0; i<permissions.length; i++){
             if(grantResults[i] != PackageManager.PERMISSION_GRANTED){
                 isAllgranted = false;
             }
         }
+
         //권한이 모두 부여되었다면
         if(isAllgranted){
             goIndexActivity();
@@ -110,16 +109,16 @@ public class PermissionActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                Toast.makeText(PermissionActivity.this, R.string.permission_setting_restart,Toast.LENGTH_LONG);
-                PermissionActivity.this.finish();
-                goIndexActivity();
+                Toast.makeText(PermissionActivity.this, R.string.permission_setting_restart,Toast.LENGTH_LONG).show();
+                finish();
+                goAppSettingActivity();
             }
         });
         dialog.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
-                PermissionActivity.this.finish();
+                finish();
             }
         });
         dialog.show();
@@ -128,7 +127,7 @@ public class PermissionActivity extends AppCompatActivity {
 
     //현재 엑티비티를 종료하고 인덱스로 넘어감
     private void goIndexActivity() {
-        Intent intent = new Intent(this,IndexActivity.class);
+        Intent intent = new Intent(getApplicationContext(),IndexActivity.class);
         startActivity(intent);
         finish();
     }
