@@ -30,6 +30,6 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/temp"
         android:textColor="@color/text_color_black"
-        android:textSize="@dimen/text_size_small2"/>
+        android:textSize="@dimen/text_size_small2" />
 
 </RelativeLayout>

@@ -56,7 +56,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         context = this;
 
         currentItem = ((MyApp)getApplication()).getMemberInfoItem();
-        setToolbar();
+//        setToolbar();
         setView();
     }
 
