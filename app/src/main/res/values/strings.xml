@@ -54,4 +54,7 @@
     <string name="albumn">앨범</string>
     <string name="camera">카메라</string>
 
+
+    <!-- 오류 체크 -->
+    <string name="err">깃오류체크</string>
 </resources>
