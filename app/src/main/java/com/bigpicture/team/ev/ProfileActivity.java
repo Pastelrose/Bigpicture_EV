@@ -78,7 +78,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //액티비티 툴바 설정
     private void setToolbar(){
         final Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         final ActionBar actionBar = getSupportActionBar();
 
         if(actionBar != null){

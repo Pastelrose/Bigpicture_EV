@@ -52,5 +52,7 @@
 
     <string name="member_insert_fail_message">사용자 등록에 실패하였습니다. 다시 시도해주세요.</string>
 
+    <string name="albumn">앨범</string>
+    <string name="camera">카메라</string>
 
 </resources>

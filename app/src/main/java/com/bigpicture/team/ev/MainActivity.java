@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         memberInfoItem =((MyApp)getApplication()).getMemberInfoItem();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 

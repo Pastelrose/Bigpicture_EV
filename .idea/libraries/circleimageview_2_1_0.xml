@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="circleimageview-2.1.0">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.android/build-cache/a252bf0377169019c545c48ba201a2f54c6a41e6/output/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.android/build-cache/a252bf0377169019c545c48ba201a2f54c6a41e6/output/res" />
+      <root url="file://$USER_HOME$/.android/build-cache/da012070fbd34fd5d6e3837b05314ee61f1a1521/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/da012070fbd34fd5d6e3837b05314ee61f1a1521/output/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
