@@ -20,4 +20,6 @@
     <dimen name="text_size_medium2">19sp</dimen>
     <dimen name="text_size_large">20sp</dimen>
     <dimen name="text_size_large2">22sp</dimen>
+
+    <dimen name="cardview_round_basic">4dp</dimen>
 </resources>

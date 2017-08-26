@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<<<<<<< HEAD
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-=======
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
->>>>>>> origin/master
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_default"
     android:focusable="true"
     android:focusableInTouchMode="true"
-<<<<<<< HEAD
-    android:orientation="vertical">
-=======
     android:orientation="vertical"
     tools:context="com.bigpicture.team.ev.ProfileIconActivity">
->>>>>>> origin/master
 
     <include layout="@layout/toolbar" />
 
@@ -43,11 +36,7 @@
             android:id="@+id/album"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:background="@drawable/button_round"
-=======
             android:background="@drawable/leaf"
->>>>>>> origin/master
             android:layout_weight="1"
             android:text="@string/albumn" />
 
@@ -58,18 +47,9 @@
             android:id="@+id/camera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-<<<<<<< HEAD
-            android:background="@drawable/button_round"
-=======
             android:background="@drawable/leaf"
->>>>>>> origin/master
             android:layout_weight="1"
             android:text="@string/camera" />
 
     </LinearLayout>
-<<<<<<< HEAD
-
 </RelativeLayout>
-=======
-</RelativeLayout>
->>>>>>> origin/master
