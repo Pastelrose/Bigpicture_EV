@@ -39,8 +39,7 @@
         </activity>
         <activity android:name=".ESCInfoActivity" />
         <activity android:name=".ESCRegisterActivity" />
-        <activity android:name=".ProfileActivity"
-            android:theme="@style/AppTheme"/>
+        <activity android:name=".ProfileActivity"/>
         <activity android:name=".ProfileIconActivity"></activity>
     </application>
 

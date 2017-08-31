@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
         memberInfoItem =((MyApp)getApplication()).getMemberInfoItem();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity
         if (id == R.id.nav_list) {
 
         } else if (id == R.id.nav_map) {
-
+            GoLib.getInstance().goFragment(getSupportFragmentManager(),
+                    R.id.content_main, ESCMapFragment.newInstance());
         } else if (id == R.id.nav_keep) {
 
         } else if (id == R.id.nav_register) {
