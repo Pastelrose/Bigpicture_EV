@@ -116,7 +116,7 @@ public class RemoteLib {
                         MediaType.parse("multipart/form-data"), imageMemo);
 
         Call<ResponseBody> call =
-                remoteService.uploadFoodImage(infoSeqBody, imageMemoBody, body);
+                remoteService.uploadESCImage(infoSeqBody, imageMemoBody, body);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call,

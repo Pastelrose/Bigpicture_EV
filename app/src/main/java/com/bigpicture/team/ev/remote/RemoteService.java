@@ -25,20 +25,20 @@ import retrofit2.http.Query;
  * 서버에 호출할 메소드를 선언하는 인터페이스
  */
 public interface RemoteService {
-    String BASE_URL = "http://211.253.25.114:80";
+    String BASE_URL = "http://211.253.25.114:3000";
     String MEMBER_ICON_URL = BASE_URL + "/member/";
     String IMAGE_URL = BASE_URL + "/img/";
 
     //사용자 정보
-    @GET("/member/{phone}")
-    Call<MemberInfoItem> selectMemberInfo(@Path("phone") String phone);
+    @GET("/member/{member_id}")
+    Call<MemberInfoItem> selectMemberInfo(@Path("member_id") String phone);
 
     @POST("/member/info")
     Call<String> insertMemberInfo(@Body MemberInfoItem memberInfoItem);
 
     @FormUrlEncoded
-    @POST("/member/phone")
-    Call<String> insertMemberPhone(@Field("phone") String phone);
+    @POST("/member/member_id")
+    Call<String> insertMemberPhone(@Field("member_id") String phone);
 
     @Multipart
     @POST("/member/icon_upload")
@@ -47,20 +47,20 @@ public interface RemoteService {
 
     //맛집 정보
     @GET("/food/info/{info_seq}")
-    Call<ESCInfoItem> selectFoodInfo(@Path("info_seq") int foodInfoSeq,
-                                      @Query("member_seq") int memberSeq);
+    Call<ESCInfoItem> selectESCInfo(@Path("cpId") int esId,
+                                      @Query("member_id") int memberId);
 
-    @POST("/food/info")
-    Call<String> insertFoodInfo(@Body ESCInfoItem infoItem);
+    @POST("/esc/info")
+    Call<String> insertESCInfo(@Body ESCInfoItem infoItem);
 
     @Multipart
-    @POST("/food/info/image")
-    Call<ResponseBody> uploadFoodImage(@Part("info_seq") RequestBody infoSeq,
+    @POST("/esc/info/image")
+    Call<ResponseBody> uploadESCImage(@Part("cpId") RequestBody infoSeq,
                                        @Part("image_memo") RequestBody imageMemo,
                                        @Part MultipartBody.Part file);
 
-    @GET("/food/list")
-    Call<ArrayList<ESCInfoItem>> listFoodInfo(@Query("member_seq") int memberSeq,
+    @GET("/esc/list")
+    Call<ArrayList<ESCInfoItem>> listESCInfo(@Query("member_id") String memberId,
                                                @Query("user_latitude") double userLatitude,
                                                @Query("user_longitude") double userLongitude,
                                                @Query("order_type") String orderType,
@@ -68,10 +68,9 @@ public interface RemoteService {
 
 
     //지도
-    @GET("/food/map/list")
-    Call<ArrayList<ESCInfoItem>> listMap(@Query("member_seq") int memberSeq,
-                                          @Query("latitude") double latitude,
-                                          @Query("longitude") double longitude,
+    @GET("/esc/map/list")
+    Call<ArrayList<ESCInfoItem>> listMap( @Query("lat") double latitude,
+                                          @Query("lon") double longitude,
                                           @Query("distance") int distance,
                                           @Query("user_latitude") double userLatitude,
                                           @Query("user_longitude") double userLongitude);

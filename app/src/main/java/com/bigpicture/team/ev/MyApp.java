@@ -31,8 +31,8 @@ public class MyApp extends Application{
         this.memberInfoItem = item;
     }
 
-    public int getMemberSeq(){
-        return memberInfoItem.seq;
+    public String getMemberId(){
+        return memberInfoItem.id;
     }
 
     public void setEscInfoItem(ESCInfoItem escInfoItem){

@@ -92,16 +92,16 @@ public class MapListAdapter extends RecyclerView.Adapter<MapListAdapter.ViewHold
                     + context.getResources().getString(R.string.unit_km));
         }
 
-        holder.name.setText(item.name);
+        holder.name.setText(item.cpNm);
         holder.description.setText(StringLib.getInstance().getSubString(context,
-                item.description, Constant.MAX_LENGTH_DESCRIPTION));
+                item.cpNm, Constant.MAX_LENGTH_DESCRIPTION));
 
         setImage(holder.imageView, item.imageFilename);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GoLib.getInstance().goBestFoodInfoActivity(context, item.seq);
+                GoLib.getInstance().goESCInfoActivity(context, item.cpId);
             }
         });
     }

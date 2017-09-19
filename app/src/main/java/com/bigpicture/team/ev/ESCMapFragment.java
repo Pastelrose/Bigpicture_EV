@@ -51,7 +51,7 @@ public class ESCMapFragment extends Fragment
 
     Context context;
 
-    int memberSeq;
+    String memberId;
     GoogleMap map;
 
     LatLng currentLatLng;
@@ -70,8 +70,8 @@ public class ESCMapFragment extends Fragment
     Button listOpen;
 
     /**
-     * BestFoodMapFragment 인스턴스를 생성해서 반환한다.
-     * @return BestFoodMapFragment 인스턴스
+     * ESCMapFragment 인스턴스를 생성해서 반환한다.
+     * @return ESCMapFragment 인스턴스
      */
     public static ESCMapFragment newInstance() {
         ESCMapFragment f = new ESCMapFragment();
@@ -79,7 +79,7 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * fragment_bestfood_map.xml 기반으로 뷰를 생성한다.
+     * fragment_es_map.xml 기반으로 뷰를 생성한다.
      * @param inflater XML를 객체로 변환하는 LayoutInflater 객체
      * @param container null이 아니라면 부모 뷰
      * @param savedInstanceState null이 아니라면 이전에 저장된 상태를 가진 객체
@@ -89,7 +89,7 @@ public class ESCMapFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         context = this.getActivity();
 
-        memberSeq = ((MyApp)this.getActivity().getApplication()).getMemberSeq();
+        memberId = ((MyApp)this.getActivity().getApplication()).getMemberId();
 
         View v = inflater.inflate(R.layout.fragment_es_map, container, false);
 
@@ -137,7 +137,7 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * 오른쪽 상단에 맛집 목록을 보여주는 버튼을 현재 상태 on 인자에 기반하여 설정한다.
+     * 목록을 보여주는 버튼을 현재 상태 on 인자에 기반하여 설정한다.
      * @param on 현재 버튼 상태가 목록보기라면 true, 목록닫기라면 false
      */
     private void setInfoList(boolean on) {
@@ -195,7 +195,7 @@ public class ESCMapFragment extends Fragment
     @Override
     public boolean onMarkerClick(Marker marker) {
         ESCInfoItem item = markerMap.get(marker);
-        GoLib.getInstance().goBestFoodInfoActivity(context, item.seq);
+        GoLib.getInstance().goESCInfoActivity(context, item.cpId);
         return true;
     }
 
@@ -219,16 +219,15 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * 주어진 정보를 기반으로 맛집 정보를 조회하고 지도에 표시한다.
-     * @param memberSeq 사용자 시퀀스
+     * 주어진 정보를 기반으로 충전소 정보를 조회하고 지도에 표시한다.
      * @param latLng 위도, 경도 객체
      * @param distance 거리
      * @param userLatLng 사용자 현재 위도, 경도 객체
      */
-    private void listMap(int memberSeq, LatLng latLng, int distance, LatLng userLatLng) {
+    private void listMap( LatLng latLng, int distance, LatLng userLatLng) {
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
 
-        Call<ArrayList<ESCInfoItem>> call = remoteService.listMap(memberSeq, latLng.latitude,
+        Call<ArrayList<ESCInfoItem>> call = remoteService.listMap(latLng.latitude,
                 latLng.longitude, distance, userLatLng.latitude, userLatLng.longitude);
         call.enqueue(new Callback<ArrayList<ESCInfoItem>>() {
             @Override
@@ -278,7 +277,7 @@ public class ESCMapFragment extends Fragment
 
         for (ESCInfoItem item : list) {
             MyLog.d(TAG, "addMarker " + item);
-            if (item.latitude != 0 && item.longitude != 0) {
+            if (item.lat != 0 && item.lon != 0) {
                 Marker marker = map.addMarker(getMarker(item));
 
                 markerMap.put(marker, item);
@@ -287,22 +286,21 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * FoodInfoItem으로 지도에 표시할 마커를 생성한다.
-     * @param item 맛집 정보 아이템 객체
+     * ESCInfoItem으로 지도에 표시할 마커를 생성한다.
+     * @param item 충전소 정보 아이템 객체
      * @return 지도에 표시할 마커 객체
      */
     private MarkerOptions getMarker(ESCInfoItem item) {
         final MarkerOptions marker = new MarkerOptions();
-        marker.position(new LatLng(item.latitude, item.longitude));
-        marker.title(item.name);
-        marker.snippet(item.tel);
+        marker.position(new LatLng(item.lat, item.lon));
+        marker.title(item.csNm);
         marker.draggable(false);
 
         return marker;
     }
 
     /**
-     * 맛집 마커를 표시할 수 있는 원을 지도에 그린다.
+     * 충전소 마커를 표시할 수 있는 원을 지도에 그린다.
      * @param position 위도, 경도 객체
      */
     private void drawCircle(LatLng position) {
@@ -317,7 +315,7 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * 지도를 움직일 경우 맛집 정보를 조회해서 화면에 표시할 수 있도록 한다.
+     * 지도를 움직일 경우 충전소 정보를 조회해서 화면에 표시할 수 있도록 한다.
      */
     @Override
     public void onCameraMove() {
@@ -325,7 +323,7 @@ public class ESCMapFragment extends Fragment
     }
 
     /**
-     * 지도를 일정 레벨 이상 확대했을 경우, 해당 위치에 있는 맛집 리스트를 서버에 요청한다.
+     * 지도를 일정 레벨 이상 확대했을 경우, 해당 위치에 있는 충전소 리스트를 서버에 요청한다.
      */
     private void showList() {
         currentZoomLevel = (int) map.getCameraPosition().zoom;
@@ -348,6 +346,6 @@ public class ESCMapFragment extends Fragment
 
         distanceMeter = GeoLib.getInstance().getDistanceMeterFromScreenCenter(map);
 
-        listMap(memberSeq, currentLatLng, distanceMeter, GeoItem.getKnownLocation());
+        listMap(currentLatLng, distanceMeter, GeoItem.getKnownLocation());
     }
 }

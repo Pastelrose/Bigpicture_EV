@@ -88,7 +88,7 @@ public class GoLib {
      * @param context 컨텍스트
      * @param infoSeq 맛집 정보 일련번호
      */
-    public void goBestFoodInfoActivity(Context context, int infoSeq) {
+    public void goESCInfoActivity(Context context, int infoSeq) {
         Intent intent = new Intent(context, ESCInfoActivity.class);
 //        intent.putExtra(ESCInfoActivity.INFO_SEQ, infoSeq);
         context.startActivity(intent);

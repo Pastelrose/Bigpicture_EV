@@ -67,13 +67,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        MyLog.d(TAG, RemoteService.MEMBER_ICON_URL + currentItem.memberIconFilename);
-
-        if(StringLib.getInstance().isBlank(currentItem.memberIconFilename)){
-            Picasso.with(this).load(R.drawable.ic_person).into(profileIconImage);
-        } else {
-            Picasso.with(this).load(RemoteService.MEMBER_ICON_URL + currentItem.memberIconFilename).into(profileIconImage);
-        }
     }
 
     //액티비티 툴바 설정
@@ -95,10 +88,10 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         profileIconImage.setOnClickListener(this);
 
         nameEdit = (EditText)findViewById(R.id.profile_name);
-        nameEdit.setText(currentItem.name);
+        nameEdit.setText(currentItem.id);
 
         sextypeEdit = (EditText)findViewById(R.id.profile_sextype);
-        sextypeEdit.setText(currentItem.sextype);
+        sextypeEdit.setText(currentItem.phone_num);
         sextypeEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,19 +99,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-        birthEdit = (EditText)findViewById(R.id.profile_birth);
-        birthEdit.setText(currentItem.birthday);
-        birthEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setBirthdayDialog();
-            }
-        });
 
         String phoneNumber = EtcLib.getInstance().getPhoneNumber(context);
 
         phoneEdit = (EditText)findViewById(R.id.profile_phone);
-        phoneEdit.setText(currentItem.phone);
+        phoneEdit.setText(currentItem.phone_num);
 
         TextView phoneStateEdit = (TextView)findViewById(R.id.phone_state);
         if(phoneNumber.startsWith("0")){
@@ -201,11 +186,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private MemberInfoItem getMemberInfoItem(){
         MemberInfoItem item = new MemberInfoItem();
-        item.phone = EtcLib.getInstance().getPhoneNumber(context);
-        item.name = nameEdit.getText().toString();
-        item.sextype = sextypeEdit.getText().toString();
-        item.birthday = birthEdit.getText().toString().replace(" ","");
-
+        item.phone_num = EtcLib.getInstance().getPhoneNumber(context);
+        item.nickname = nameEdit.getText().toString();
         return item;
     }
 
@@ -213,9 +195,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //newItem : 사용자 정보 객체
     //변경되면 return true 아니라면 false
     private boolean isChanged(MemberInfoItem newItem){
-        if(newItem.name.trim().equals(currentItem.name)
-                && newItem.sextype.trim().equals(currentItem.sextype)
-                && newItem.birthday.trim().equals(currentItem.birthday)){
+        if(newItem.nickname.trim().equals(currentItem.nickname)
+                && newItem.phone_num.trim().equals(currentItem.phone_num)){
             Log.d(TAG,"return"+false);
             return false;
         } else {
@@ -227,7 +208,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //newItem 새용자가 새로 입력한 정보 객체
     //입력했다면 return false 안했다면 true
     private boolean isNoName(MemberInfoItem newItem){
-        if(StringLib.getInstance().isBlank(newItem.name)) {
+        if(StringLib.getInstance().isBlank(newItem.id)) {
             return true;
         } else {
             return false;
@@ -279,8 +260,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 if(response.isSuccessful()){
                     String seq = response.body();
                     try{
-                        currentItem.seq = Integer.parseInt(seq);
-                        if(currentItem.seq ==0){
+                        if(currentItem.id == null){
                             MyToast.s(context,R.string.member_insert_fail_message);
                             return;
                         }
@@ -288,9 +268,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         MyToast.s(context, R.string.member_insert_fail_message);
                         return;
                     }
-                    currentItem.name = newItem.name;
-                    currentItem.sextype = newItem.sextype;
-                    currentItem.birthday = newItem.birthday;
+                    currentItem.id = newItem.id;
+                    currentItem.phone_num = newItem.phone_num;
                     finish();
                 }
             }

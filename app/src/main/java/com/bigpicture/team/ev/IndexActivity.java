@@ -83,12 +83,13 @@ public class IndexActivity extends AppCompatActivity {
     //ID와 동일한 사용자 조회하기 위해 selectMemberInfo()호출,
     //setLastKnownLocation() 호출하여 현재 위치 설정
     public void startTask(){
-        String userId = EtcLib.getInstance().getPhoneNumber(this);
+        //String userId = EtcLib.getInstance().getPhoneNumber(this);
 
         //UserID 확인
         //Toast.makeText(IndexActivity.this, userId,Toast.LENGTH_LONG).show();
-        selectMemberInfo(userId);
+       // selectMemberInfo(userId);
         GeoLib.getInstance().setLastKnownLocation(this);
+        startMain(); //메인 강제실행
     }
 
     //레트로핏을 사용하여 사용자 정보 조회. 조회성공시 setMemberInfoItem호출
@@ -101,7 +102,7 @@ public class IndexActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
                 MemberInfoItem item = response.body();
-                if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.name)){
+                if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.id)){
                     MyLog.d(TAG,"success "+ response.body().toString());
                     setMemberInfoItem(item);
                 }
@@ -139,7 +140,7 @@ public class IndexActivity extends AppCompatActivity {
     //전화번호를 서버에 저장하고 MainActivity 실행한 후에 ProfileActivity 실행
     //그리고 현재 액티비티 종료
     private void goProfileActivity(MemberInfoItem item){
-        if (item==null || item.seq<=0){
+        if (item==null){
             insertMemberPhone();
 
             //Toast.makeText(IndexActivity.this, "item is null or seq is less than 0",Toast.LENGTH_LONG).show();

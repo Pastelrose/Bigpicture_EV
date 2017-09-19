@@ -80,18 +80,14 @@ public class MainActivity extends AppCompatActivity
                 GoLib.getInstance().goProfileActivity(MainActivity.this);
             }
         });
-        if(StringLib.getInstance().isBlank(memberInfoItem.memberIconFilename)) {
-            Picasso.with(this).load(R.drawable.leaf).into(profileIconImage);
-        } else {
-            Picasso.with(this).load(RemoteService.MEMBER_ICON_URL + memberInfoItem.memberIconFilename).into(profileIconImage);
-        }
+
 
         TextView nameText = (TextView) headerLayout.findViewById(R.id.name);
 
-        if(memberInfoItem.name == null || memberInfoItem.name.equals("")){
+        if(memberInfoItem.id == null || memberInfoItem.id.equals("")){
             nameText.setText(R.string.name_need);
         }else {
-            nameText.setText(memberInfoItem.name);
+            nameText.setText(memberInfoItem.id);
         }
 
     }

@@ -77,27 +77,27 @@ public class ProfileIconActivity extends AppCompatActivity implements View.OnCli
 
     //프로필 아이콘 설정
     private void setProfileIcon(){
-        MyLog.d(TAG,"onResume"+ RemoteService.MEMBER_ICON_URL+memberInfoItem.memberIconFilename);
-
-        if(StringLib.getInstance().isBlank(memberInfoItem.memberIconFilename)){
-            Picasso.with(this).load(R.drawable.ic_person).into(profileIconImage);
-        } else {
-            Picasso.with(this).load(RemoteService.MEMBER_ICON_URL+memberInfoItem.memberIconFilename).into(profileIconImage);
-        }
+//        MyLog.d(TAG,"onResume"+ RemoteService.MEMBER_ICON_URL+memberInfoItem.memberIconFilename);
+//
+//        if(StringLib.getInstance().isBlank(memberInfoItem.memberIconFilename)){
+//            Picasso.with(this).load(R.drawable.ic_person).into(profileIconImage);
+//        } else {
+//            Picasso.with(this).load(RemoteService.MEMBER_ICON_URL+memberInfoItem.memberIconFilename).into(profileIconImage);
+//        }
     }
 
-    //사용자가 선택한 프로필 아이콘을 저장할 파일 이름을 설정
-    private void setProfileIconFile(){
-        profileIconFilename = memberInfoItem.seq + "_" + String.valueOf(System.currentTimeMillis());
-        profileIconFile = FileLib.getInstance().getProfileIconFile(context,profileIconFilename);
-    }
+//    //사용자가 선택한 프로필 아이콘을 저장할 파일 이름을 설정
+//    private void setProfileIconFile(){
+//        profileIconFilename = memberInfoItem.seq + "_" + String.valueOf(System.currentTimeMillis());
+//        profileIconFile = FileLib.getInstance().getProfileIconFile(context,profileIconFilename);
+//    }
 
     //프로필 아이콘을 설정하기 위해 선택할 수 있는 앨범이나 카메라 버튼의 클릭 이벤트 설정
     //v : 클릭한 뷰 객체
 
     @Override
     public void onClick(View v) {
-        setProfileIconFile();
+//        setProfileIconFile();
         if(v.getId() == R.id.album){
             getImageFromAlbum();
         } else if(v.getId() == R.id.camera){
@@ -189,7 +189,7 @@ public class ProfileIconActivity extends AppCompatActivity implements View.OnCli
             cropImageFromCamera();
         } else if (requestCode == CROP_FROM_CAMERA) {
             Picasso.with(this).load(profileIconFile).into(profileIconImage);
-            uploadProfileIcon();
+ //           uploadProfileIcon();
         } else if (requestCode == PICK_FROM_ALBUM && intent != null){
             Uri dataUri = intent.getData();
             if(dataUri != null){
@@ -197,13 +197,13 @@ public class ProfileIconActivity extends AppCompatActivity implements View.OnCli
             }
         } else if(requestCode == CROP_FROM_ALBUM && intent !=null){
             Picasso.with(this).load(profileIconFile).into(profileIconImage);
-            uploadProfileIcon();
+  //          uploadProfileIcon();
         }
     }
 
-    //프로필 아이콘을 서버에 업로드
-    private void uploadProfileIcon(){
-        RemoteLib.getInstance().uploadMemberIcon(memberInfoItem.seq, profileIconFile);
-        memberInfoItem.memberIconFilename = profileIconFilename + ".png";
-    }
+//    //프로필 아이콘을 서버에 업로드
+//    private void uploadProfileIcon(){
+//        RemoteLib.getInstance().uploadMemberIcon(memberInfoItem.id, profileIconFile);
+//        memberInfoItem.memberIconFilename = profileIconFilename + ".png";
+//    }
 }
