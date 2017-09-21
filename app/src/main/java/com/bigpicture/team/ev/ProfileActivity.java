@@ -35,16 +35,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity {
 
     private final String TAG = this.getClass().getSimpleName();
     Context context;
-    ImageView profileIconImage;
-    ImageView profileIconChangeImage;
-    EditText nameEdit;
-    EditText sextypeEdit;
-    EditText birthEdit;
-    EditText phoneEdit;
+//    ImageView profileIconImage;
+//    ImageView profileIconChangeImage;
+    EditText idEdit;
+    EditText pwEdit;
+    EditText nicknameEdit;
+    EditText ageEdit;
+    EditText phone_numEdit;
+    EditText car_modelEdit;
+    EditText charge_typeEdit;
 
     MemberInfoItem currentItem;
 
@@ -81,29 +84,31 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
     //액티비티 화면 설정
     private void setView(){
-        profileIconImage = (ImageView)findViewById(R.id.profile_icon);
-        profileIconImage.setOnClickListener(this);
+//        profileIconImage = (ImageView)findViewById(R.id.profile_icon);
+//        profileIconImage.setOnClickListener(this);
 
-        nameEdit = (EditText)findViewById(R.id.profile_name);
-        nameEdit.setText(currentItem.id);
+        idEdit = (EditText)findViewById(R.id.profile_id);
+        idEdit.setText(currentItem.id);
+        pwEdit = (EditText)findViewById(R.id.profile_id);
+        pwEdit.setText(currentItem.id);
+        nicknameEdit = (EditText)findViewById(R.id.profile_id);
+        nicknameEdit.setText(currentItem.id);
 
-        sextypeEdit = (EditText)findViewById(R.id.profile_sextype);
-        sextypeEdit.setText(currentItem.phone_num);
-        sextypeEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setSexTypeDialog();
-            }
-        });
+        car_modelEdit = (EditText)findViewById(R.id.profile_id);
+        car_modelEdit.setText(currentItem.id);
+        charge_typeEdit = (EditText)findViewById(R.id.profile_id);
+        charge_typeEdit.setText(currentItem.id);
+
+        ageEdit = (EditText)findViewById(R.id.profile_age);
+        ageEdit.setText(currentItem.age);
 
 
         String phoneNumber = EtcLib.getInstance().getPhoneNumber(context);
 
-        phoneEdit = (EditText)findViewById(R.id.profile_phone);
-        phoneEdit.setText(currentItem.phone_num);
+        phone_numEdit = (EditText)findViewById(R.id.profile_phone);
+        phone_numEdit.setText(currentItem.phone_num);
 
         TextView phoneStateEdit = (TextView)findViewById(R.id.phone_state);
         if(phoneNumber.startsWith("0")){
@@ -113,51 +118,36 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    //성별 선택 다이얼로그
-    private void setSexTypeDialog(){
-        final String[] sexTypes = new String[2];
-        sexTypes[0] = getResources().getString(R.string.sex_man);
-        sexTypes[1] = getResources().getString(R.string.sex_woman);
 
-        new AlertDialog.Builder(this).setItems(sexTypes, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if(which >=0){
-                    sextypeEdit.setText(sexTypes[which]);
-                }
-                dialog.dismiss();
-            }
-        }).show();
-    }
-
-    //생일 선택 다이얼로그
-    private void setBirthdayDialog(){
-        GregorianCalendar calendar = new GregorianCalendar();
-        int year = calendar.get(Calendar.YEAR);
-        int month = calendar.get(Calendar.MONTH);
-        int day = calendar.get(Calendar.DAY_OF_MONTH);
-
-        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                String myMonth;
-                if(month + 1 <10){
-                    myMonth = "0"+(month+1);
-                }else {
-                    myMonth = ""+(month+1);
-                }
-
-                String myDay;
-                if(dayOfMonth <10){
-                    myDay = "0"+dayOfMonth;
-                } else {
-                    myDay = ""+dayOfMonth;
-                }
-                String date = year + " " +myMonth+" "+myDay;
-                birthEdit.setText(date);
-            }
-        },year,month,day).show();
-    }
+//
+//    //생일 선택 다이얼로그
+//    private void setBirthdayDialog(){
+//        GregorianCalendar calendar = new GregorianCalendar();
+//        int year = calendar.get(Calendar.YEAR);
+//        int month = calendar.get(Calendar.MONTH);
+//        int day = calendar.get(Calendar.DAY_OF_MONTH);
+//
+//        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                String myMonth;
+//                if(month + 1 <10){
+//                    myMonth = "0"+(month+1);
+//                }else {
+//                    myMonth = ""+(month+1);
+//                }
+//
+//                String myDay;
+//                if(dayOfMonth <10){
+//                    myDay = "0"+dayOfMonth;
+//                } else {
+//                    myDay = ""+dayOfMonth;
+//                }
+//                String date = year + " " +myMonth+" "+myDay;
+//                birthEdit.setText(date);
+//            }
+//        },year,month,day).show();
+//    }
 
     //오른쪽 상단 메뉴 구성. 닫기 메뉴만 설정되어있는 menu_close.xml 불러옴
     //menu: 메뉴객체, 메뉴를 보여준다면 return true, 보여주지 않으면 return false
@@ -187,7 +177,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private MemberInfoItem getMemberInfoItem(){
         MemberInfoItem item = new MemberInfoItem();
         item.phone_num = EtcLib.getInstance().getPhoneNumber(context);
-        item.nickname = nameEdit.getText().toString();
+        item.id = idEdit.getText().toString();
+        item.pw = pwEdit.getText().toString();
+        item.nickname = nicknameEdit.getText().toString();
+        item.age = ageEdit.getText().toString();
+        item.car_model = car_modelEdit.getText().toString();
+        item.charge_type = charge_typeEdit.getText().toString();
         return item;
     }
 
@@ -195,7 +190,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //newItem : 사용자 정보 객체
     //변경되면 return true 아니라면 false
     private boolean isChanged(MemberInfoItem newItem){
-        if(newItem.nickname.trim().equals(currentItem.nickname)
+        if(newItem.id.trim().equals(currentItem.id) && newItem.pw.trim().equals(currentItem.pw)
                 && newItem.phone_num.trim().equals(currentItem.phone_num)){
             Log.d(TAG,"return"+false);
             return false;
@@ -207,22 +202,44 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     //사용자가 이름을 입력했는지 확인
     //newItem 새용자가 새로 입력한 정보 객체
     //입력했다면 return false 안했다면 true
-    private boolean isNoName(MemberInfoItem newItem){
+    private boolean isNoID(MemberInfoItem newItem){
         if(StringLib.getInstance().isBlank(newItem.id)) {
             return true;
         } else {
             return false;
         }
     }
+    private boolean isNoPW(MemberInfoItem newItem){
+        if(StringLib.getInstance().isBlank(newItem.pw)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    //나이가 숫자인지 체크
+    private boolean checkAge(MemberInfoItem newItem){
+        String str = "int";
+        if(str.indexOf(newItem.age.getClass().getName()) < 0){
+            return false;
+        }
+        return true;
+    }
 
     //화면이 닫히기 전에 변경 유무를 확인해서 변경사항이 있다면 저장
     private void close(){
         MemberInfoItem newItem = getMemberInfoItem();
 
-        if(!isChanged(newItem) && !isNoName(newItem)){
+        if(!isChanged(newItem) && !isNoID(newItem) && !isNoPW(newItem)){
             finish();
-        } else if(isNoName(newItem)) {
-            MyToast.s(context,R.string.name_need);
+        } else if(isNoID(newItem)) {
+            MyToast.s(context, R.string.id_need);
+            finish();
+        } else if(isNoPW(newItem)){
+            MyToast.s(context, R.string.pw_need);
+            finish();
+        } else if(checkAge(newItem)) {
+            MyToast.s(context, "나이를 숫자로 입력하세요");
             finish();
         } else {
             new AlertDialog.Builder(this).setTitle(R.string.change_save).setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -249,16 +266,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             return;
         }
 
-        MyLog.d(TAG,"insertItem "+newItem.toString());
+        MyLog.d(TAG,"insert Item "+newItem.toString());
 
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
 
-        Call<String> call = remoteService.insertMemberInfo(newItem);
+        Call<String> call = remoteService.insertMemberInfo(newItem); //여기서 저장 요청
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 if(response.isSuccessful()){
-                    String seq = response.body();
+                    String id = response.body();
                     try{
                         if(currentItem.id == null){
                             MyToast.s(context,R.string.member_insert_fail_message);
@@ -269,7 +286,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         return;
                     }
                     currentItem.id = newItem.id;
+                    currentItem.pw = newItem.pw;
+                    currentItem.nickname = newItem.nickname;
+                    currentItem.age = newItem.age;
                     currentItem.phone_num = newItem.phone_num;
+                    currentItem.car_model = newItem.car_model;
+                    currentItem.charge_type = newItem.charge_type;
                     finish();
                 }
             }
@@ -289,20 +311,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         close();
     }
 
-    //프로필 아이콘이나 프로필 아이콘 변경 뷰를 클릭했을 떄 프로필 아이콘 변경하도록
-    //startprofileIconChange() 호출
-    //v: 클릭한 뷰 객체
 
-    @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.profile_icon || v.getId() == R.id.profile_icon_change) {
-            startProfileChange();
-        }
-    }
 
-    //프로필을 변경하게 해준다
-    private void startProfileChange(){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
-    }
 }

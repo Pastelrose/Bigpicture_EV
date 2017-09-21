@@ -62,7 +62,6 @@ public class MainActivity extends AppCompatActivity
     //프로필 정보는 별도 액티비티에서 변경될 수 있으므로 변경을 바로 감지하기 위해서
     //화면이 새로 보여질 때마다 setProfileView()를 호출
 
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -73,21 +72,20 @@ public class MainActivity extends AppCompatActivity
 
     private void setProfileView(){
         profileIconImage = (CircleImageView)headerLayout.findViewById(R.id.profile_icon);
-        profileIconImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawer.closeDrawer(GravityCompat.START);
-                GoLib.getInstance().goProfileActivity(MainActivity.this);
-            }
-        });
-
+//        profileIconImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                drawer.closeDrawer(GravityCompat.START);
+//                GoLib.getInstance().goProfileActivity(MainActivity.this);
+//            }
+//        });
 
         TextView nameText = (TextView) headerLayout.findViewById(R.id.name);
 
-        if(memberInfoItem.id == null || memberInfoItem.id.equals("")){
-            nameText.setText(R.string.name_need);
+        if(memberInfoItem.nickname == null || memberInfoItem.nickname.equals("")){
+            nameText.setText(R.string.nickname_need);
         }else {
-            nameText.setText(memberInfoItem.id);
+            nameText.setText(memberInfoItem.nickname);
         }
 
     }
@@ -116,9 +114,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_map) {
             GoLib.getInstance().goFragment(getSupportFragmentManager(),
                     R.id.content_main, ESCMapFragment.newInstance());
-        } else if (id == R.id.nav_keep) {
+        } else if (id == R.id.nav_board) {
 
-        } else if (id == R.id.nav_register) {
+        } else if (id == R.id.nav_news) {
 
         } else if (id == R.id.nav_profile) {
             GoLib.getInstance().goProfileActivity(this);

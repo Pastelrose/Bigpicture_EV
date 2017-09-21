@@ -83,26 +83,25 @@ public class IndexActivity extends AppCompatActivity {
     //ID와 동일한 사용자 조회하기 위해 selectMemberInfo()호출,
     //setLastKnownLocation() 호출하여 현재 위치 설정
     public void startTask(){
-        //String userId = EtcLib.getInstance().getPhoneNumber(this);
+        String phone_num = EtcLib.getInstance().getPhoneNumber(this);
 
-        //UserID 확인
+        //phone번호 확인
         //Toast.makeText(IndexActivity.this, userId,Toast.LENGTH_LONG).show();
-       // selectMemberInfo(userId);
+        selectMemberInfo(phone_num);
         GeoLib.getInstance().setLastKnownLocation(this);
-        startMain(); //메인 강제실행
     }
 
-    //레트로핏을 사용하여 사용자 정보 조회. 조회성공시 setMemberInfoItem호출
+    //레트로핏을 사용하여 폰번호로 사용자 정보 조회. 조회성공시 setMemberInfoItem호출
     //실패시에 goProfileactivity()호출
-    public void selectMemberInfo(String userId){
+    public void selectMemberInfo(String phone_num){
         RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
-        Call<MemberInfoItem> call = remoteService.selectMemberInfo(userId);
+        Call<MemberInfoItem> call = remoteService.selectMemberInfo(phone_num);
 
         call.enqueue(new Callback<MemberInfoItem>() {
             @Override
             public void onResponse(Call<MemberInfoItem> call, Response<MemberInfoItem> response) {
                 MemberInfoItem item = response.body();
-                if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.id)){
+                if(response.isSuccessful() && !StringLib.getInstance().isBlank(item.phone_num)){
                     MyLog.d(TAG,"success "+ response.body().toString());
                     setMemberInfoItem(item);
                 }
@@ -136,17 +135,10 @@ public class IndexActivity extends AppCompatActivity {
         finish();
     }
 
-    //사용자 정보를 조회하지 못했을때 insertMemberPhone 실행
-    //전화번호를 서버에 저장하고 MainActivity 실행한 후에 ProfileActivity 실행
+    //사용자 정보를 조회하지 못했을때
+    //MainActivity 실행한 후에 ProfileActivity 실행
     //그리고 현재 액티비티 종료
     private void goProfileActivity(MemberInfoItem item){
-        if (item==null){
-            insertMemberPhone();
-
-            //Toast.makeText(IndexActivity.this, "item is null or seq is less than 0",Toast.LENGTH_LONG).show();
-        }
-      //  Intent intent = new Intent(IndexActivity.this, MainActivity.class);
-      //  startActivity(intent);
 
         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
@@ -158,28 +150,28 @@ public class IndexActivity extends AppCompatActivity {
     }
 
     //폰번호를 서버에 저장
-    private void insertMemberPhone(){
-        String phone = EtcLib.getInstance().getPhoneNumber(this);
-        RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
-
-        Call<String> call = remoteService.insertMemberPhone(phone);
-        call.enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if(response.isSuccessful()){
-                    MyLog.d(TAG,"success insert id"+response.body().toString());
-                }else{
-                    int statusCode = response.code();
-
-                    ResponseBody errorBody = response.errorBody();
-                    MyLog.d(TAG,"fail"+statusCode+errorBody.toString());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                MyLog.d(TAG,"no internet connectivity");
-            }
-        });
-    }
+//    private void insertMemberPhone(){
+//        String phone = EtcLib.getInstance().getPhoneNumber(this);
+//        RemoteService remoteService = ServiceGenerator.createService(RemoteService.class);
+//
+//        Call<String> call = remoteService.insertMemberPhone(phone);
+//        call.enqueue(new Callback<String>() {
+//            @Override
+//            public void onResponse(Call<String> call, Response<String> response) {
+//                if(response.isSuccessful()){
+//                    MyLog.d(TAG,"success insert id"+response.body().toString());
+//                }else{
+//                    int statusCode = response.code();
+//
+//                    ResponseBody errorBody = response.errorBody();
+//                    MyLog.d(TAG,"fail"+statusCode+errorBody.toString());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<String> call, Throwable t) {
+//                MyLog.d(TAG,"no internet connectivity");
+//            }
+//        });
+//    }
 }
